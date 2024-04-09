@@ -13,6 +13,7 @@ print(f"You have {attempts} attempts to guess the word.")
 
 while attempts > 0 and '_' in word_display:
     print("\n" + ' '.join(word_display))
+    
     guess = input("Guess a letter: ").lower()
 
     # Check if the guessed letter is in the chosen word

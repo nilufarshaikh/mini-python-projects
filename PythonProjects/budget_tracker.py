@@ -13,35 +13,29 @@ def get_balance(budget, expenses):
 
 def show_budget_details(budget, expenses):
     print(f"Total Budget: {budget}")
+    
     print("Expenses:")
     for expense in expenses:
         print(f"- {expense['description']}: {expense['amount']}")
+    
     print(f"Total Spent: {get_total_expenses(expenses)}")
     print(f"Remaining Budget: {get_balance(budget, expenses)}")
-
-def load_budget_data(filepath):
-    try:
-        with open(filepath, 'r') as file:
-            data = json.load(file)
-            return data['initial_budget'], data['expenses']
-    except (FileNotFoundError, json.JSONDecodeError):
-        return 0, []
 
 def save_budget_data(filepath, initial_budget, expenses):
     data = {
         'initial_budget': initial_budget,
         'expenses': expenses
     }
+
     with open(filepath, 'w') as file:
         json.dump(data, file, indent=4)
 
 
 def main():
     print("Welcome to the Budget Tracker App!")
-    # initial_budget, expenses = load_budget_data(filepath)
+
     initial_budget = float(input("Please enter your initial budget: "))
     filepath = 'budget_data.json'  # Define the path to your JSON file
-
     budget = initial_budget
     expenses = []
 
@@ -57,8 +51,6 @@ def main():
             amount = float(input("Enter expense amount: "))
             add_expense(expenses, description, amount)
         elif choice == "2":
-            print(budget)
-            print(expenses)
             show_budget_details(budget, expenses)
         elif choice == "3":
             save_budget_data(filepath, initial_budget, expenses)
